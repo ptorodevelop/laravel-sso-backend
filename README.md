@@ -1,61 +1,150 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🔐 Laravel SSO Backend – Versión 1
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+API Backend desarrollada en **Laravel 11** que implementa un sistema **Single Sign-On (SSO)** con autenticación basada en **JWT**, validación de token, envío de notificaciones y acceso a procesos restringidos.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🚀 Características principales
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- ✅ Autenticación mediante **documento y contraseña**
+- ✅ Generación y validación de **tokens JWT**
+- ✅ Envío de **notificaciones por canal** (Email, SMS, Telegram)
+- ✅ **Middleware de autenticación** para rutas protegidas
+- ✅ Respuestas **JSON estandarizadas**
+- ✅ Arquitectura limpia con capas:
+  - **Controllers**
+  - **Services (Dominio)**
+  - **Infrastructure (Infraestructura)**
+  - **Support / Traits (utilitarios y constantes)**
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## 🧱 Estructura de carpetas relevante
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+app/
+├── Domain/
+│ └── Services/
+│ └── AuthService.php
+├── Http/
+│ ├── Controllers/
+│ │ └── Api/V1/
+│ │ ├── AuthController.php
+│ │ ├── NotificationController.php
+│ │ └── ProcessController.php
+│ ├── Requests/
+│ │ └── LoginRequest.php
+│ └── Middleware/
+├── Infrastructure/
+│ ├── Notifications/
+│ │ ├── EmailNotification.php
+│ │ ├── SmsNotification.php
+│ │ └── TelegramNotification.php
+│ └── Persistence/
+│ └── Models/
+│ └── User.php
+├── Support/
+│ └── Constant.php
+└── Traits/
+└── ApiResponse.php
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-## Laravel Sponsors
+## ⚙️ Instalación del proyecto
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### 1️⃣ Clonar el repositorio
+```bash
+git clone https://github.com/<tu_usuario>/laravel-sso-backend.git
+cd laravel-sso-backend
 
-### Premium Partners
+2️⃣ Instalar dependencias
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+composer install
 
-## Contributing
+3️⃣ Instalar y configurar JWT Auth
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Ejecuta los siguientes comandos para habilitar la autenticación basada en tokens JWT:
 
-## Code of Conduct
+composer require tymon/jwt-auth
+php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServiceProvider"
+php artisan jwt:secret
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-## Security Vulnerabilities
+4️⃣ Configurar el entorno
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Copia el archivo .env.example o crea uno nuevo .env con tus credenciales.
+Ejemplo:
 
-## License
+APP_NAME=SSO_Backend
+APP_ENV=local
+APP_KEY=base64:xxxxx
+APP_DEBUG=true
+APP_URL=http://localhost:8000
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=sso_db
+DB_USERNAME=root
+DB_PASSWORD=
+
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.gmail.com
+MAIL_PORT=587
+MAIL_USERNAME=tu_cuenta@gmail.com
+MAIL_PASSWORD=tu_contraseña_de_aplicacion
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS=tu_cuenta@gmail.com
+MAIL_FROM_NAME="SSO Backend"
+
+JWT_SECRET=joHNoKO5DO7gV5ssNDIYr6t2t4t91o5tlfXfARH8UlZSTyfKmkKPHLCyRAj6KfHr
+JWT_TTL=120
+
+5️⃣ Migrar la base de datos
+
+php artisan migrate
+
+5️⃣ Ejecutar el servidor local
+php artisan serve
+
+6️⃣ Limpiar y optimizar cachés
+
+php artisan optimize:clear
+
+7️⃣ Iniciar el servidor
+
+php artisan serve
+
+🧩 Endpoints disponibles (V1)
+
+| Método | Endpoint                     | Descripción                                           | Protección             |
+| ------ | ---------------------------- | ----------------------------------------------------- | ---------------------- |
+| POST   | `/api/v1/auth/login`         | Autentica al usuario por documento y genera token JWT | Pública                |
+| POST   | `/api/v1/auth/validate`      | Valida si un token JWT es válido                      | Pública                |
+| POST   | `/api/v1/notifications/send` | Envía notificación por email, sms o telegram          | Pública (por ahora)    |
+| GET    | `/api/v1/process/restricted` | Endpoint protegido — requiere token válido            | Protegido (`auth:api`) |
+
+
+📦 Estandarización de respuestas API
+
+{
+  "success": true,
+  "message": "Inicio de sesión exitoso",
+  "data": {
+    "access_token": "...",
+    "token_type": "bearer",
+    "expires_in": "120"
+  }
+}
+
+Errores también siguen el mismo formato:
+
+{
+  "success": false,
+  "message": "Errores de validación",
+  "data": {
+    "document": ["El campo documento es obligatorio."]
+  }
+}
+
+
