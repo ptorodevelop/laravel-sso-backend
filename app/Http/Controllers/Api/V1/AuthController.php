@@ -24,9 +24,9 @@ class AuthController extends Controller
         if (! $token) {
             return $this->responseJson(false, 'Credenciales inválidas', [], Constant::HTTP_CODE_UNAUTHORIZED);
         }
-        $response = ['access_token' => $token, 'token_type' => 'bearer', 'expires_in' => '120'];
+        $response = ['access_token' => $token, 'refresh_token' => base64_encode(str()->random(30))];
 
-        return $this->responseJson(true, 'Inicio de sesión exitoso', $response, Constant::HTTP_CODE_OK);
+        return $this->responseJson(true, 'Inicio de sesión exitoso (V1)', $response, Constant::HTTP_CODE_OK);
     }
 
     public function validateToken(ValidateTokenRequest $request)

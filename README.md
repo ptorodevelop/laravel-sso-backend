@@ -98,7 +98,7 @@ MAIL_FROM_ADDRESS=tu_cuenta@gmail.com
 MAIL_FROM_NAME="SSO Backend"
 
 JWT_SECRET=joHNoKO5DO7gV5ssNDIYr6t2t4t91o5tlfXfARH8UlZSTyfKmkKPHLCyRAj6KfHr
-JWT_TTL=120
+JWT_TTL=2
 
 5️⃣ Migrar la base de datos
 
