@@ -16,13 +16,13 @@ Route::prefix('v1')->group(function () {
     Route::middleware('auth:api')->get('process/restricted', [ProcessController::class, 'index']);
 });
 
-// // V2
-// Route::prefix('v2')->group(function () {
-//     Route::post('auth/login', [AuthControllerV2::class, 'login']);
-//     Route::middleware('auth:api')->get('process/restricted', [ProcessControllerV2::class, 'index']);
-// });
+// V2
+Route::prefix('v2')->group(function () {
+    Route::post('auth/login', [AuthControllerV2::class, 'login']);
+    Route::middleware('auth:api')->get('process/restricted', [ProcessControllerV2::class, 'index']);
+});
 
-// // V3
+// V3
 // Route::prefix('v3')->group(function () {
 //     Route::post('auth/login', [AuthControllerV3::class, 'login']);
 //     Route::middleware('auth:api')->get('process/restricted', [ProcessControllerV3::class, 'index']);
