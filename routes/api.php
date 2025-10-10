@@ -22,8 +22,8 @@ Route::prefix('v2')->group(function () {
     Route::middleware('auth:api')->get('process/restricted', [ProcessControllerV2::class, 'index']);
 });
 
-// V3
-// Route::prefix('v3')->group(function () {
-//     Route::post('auth/login', [AuthControllerV3::class, 'login']);
-//     Route::middleware('auth:api')->get('process/restricted', [ProcessControllerV3::class, 'index']);
-// });
+//V3
+Route::prefix('v3')->group(function () {
+    Route::post('auth/login', [AuthControllerV3::class, 'login']);
+    Route::middleware('auth:api')->get('process/restricted', [ProcessControllerV3::class, 'index']);
+});

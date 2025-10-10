@@ -20,4 +20,6 @@ class Constant
     public const RESPONSE_SUCCESS = 'success';
     public const RESPONSE_MESSAGE = 'message';
     public const RESPONSE_DATA = 'data';
+    public const OTP_TTL = 2; // OTP time to live in minutes
+
 }

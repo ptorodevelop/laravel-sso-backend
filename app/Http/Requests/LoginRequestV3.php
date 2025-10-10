@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SendNotificationRequest extends BaseFormRequest
+class LoginRequestV3 extends BaseFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,8 +22,7 @@ class SendNotificationRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-            'canal' => 'required|string|in:email,sms,telegram',
-            'destino' => 'required|string'
+            'codigoOTP' => 'required|string'
         ];
     }
 }
