@@ -20,10 +20,10 @@ class ProcessController extends Controller
         ];
 
         $data = [
-            'message' => 'Acceso exitoso a proceso restringido versión 2',
+            'message' => __('messages.process_access_success', ['version' => 'v2']),
             'meta' => $metadata
         ];
 
-        return $this->responseJson(true, 'Proceso autorizado (v2)', $data, Constant::HTTP_CODE_OK);
+        return $this->responseJson(true, __('messages.operation_success'), $data, Constant::HTTP_CODE_OK);
     }
 }
