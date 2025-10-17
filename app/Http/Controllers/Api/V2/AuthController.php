@@ -24,7 +24,7 @@ class AuthController extends Controller
        $token = $this->authService->loginWithEmail($request->email, $request->password);
 
         if (!$token) {
-            return $this->responseJson(false, 'Credenciales inválidas', [], Constant::HTTP_CODE_UNAUTHORIZED);
+            return $this->responseJson(false, __('messages.auth_invalid_credentials'), [], Constant::HTTP_CODE_UNAUTHORIZED);
         }
 
         $response = [
@@ -32,7 +32,7 @@ class AuthController extends Controller
             'refresh_token' => base64_encode(str()->random(30))
         ];
 
-        return $this->responseJson(true, 'Inicio de sesión exitoso (v2)', $response, Constant::HTTP_CODE_OK);
+        return $this->responseJson(true, __('messages.auth_login_success', ['version' => 'v2']), $response, Constant::HTTP_CODE_OK);
     }
 
     public function validateToken(ValidateTokenRequest $request): JsonResponse
@@ -40,10 +40,10 @@ class AuthController extends Controller
         $valid = $this->authService->validateToken($request->token);
 
         if (!$valid) {
-            return $this->responseJson(false, 'Token inválido o expirado', [], Constant::HTTP_CODE_UNAUTHORIZED);
+            return $this->responseJson(false, __('messages.auth_token_invalid'), [], Constant::HTTP_CODE_UNAUTHORIZED);
         }
 
-        return $this->responseJson(true, 'Token válido (v2)', ['token_valid' => true], Constant::HTTP_CODE_OK);
+        return $this->responseJson(true, __('messages.token_valid', ['version' => 'v2']), ['token_valid' => true], Constant::HTTP_CODE_OK);
     }
 }
 

@@ -26,9 +26,9 @@ class AuthController extends Controller
         $request->validate(['codigoOTP' => 'required|string']);
         $token = $this->authService->loginWithOtp($request->codigoOTP);
         if (! $token) {
-            return $this->responseJson(false, 'Código OTP inválido o expirado', [], Constant::HTTP_CODE_UNAUTHORIZED);
+            return $this->responseJson(false, __('messages.auth_otp_invalid'), [], Constant::HTTP_CODE_UNAUTHORIZED);
         }
         $response = ['access_token' => $token, 'refresh_token' => base64_encode(str()->random(30))];
-        return $this->responseJson(true, 'Inicio de sesión exitoso (v3)', $response, Constant::HTTP_CODE_OK);
+        return $this->responseJson(true, __('messages.auth_login_success', ['version' => 'v3']), $response, Constant::HTTP_CODE_OK);
     }
 }
