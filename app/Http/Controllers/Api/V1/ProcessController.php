@@ -12,6 +12,6 @@ class ProcessController extends Controller
 
     public function index()
     {
-        return $this->responseJson(true, 'Operación exitosa', ['message' => 'Acceso exitoso a proceso restringido version v1'], Constant::HTTP_CODE_OK);
+        return $this->responseJson(true, __('messages.operation_success'), ['message' => __('messages.process_access_success', ['version' => 'v1'])], Constant::HTTP_CODE_OK);
     }
 }
